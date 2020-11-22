@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  db:
+    container_name: postgres-dev
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_DB: roomdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  app:
+    container_name: app-floor
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db/roomdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    restart: always
+    depends_on:
+      - db
+
+
+

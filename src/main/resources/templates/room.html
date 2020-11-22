@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        #test {
+            width: 1000px;
+            height: 1000px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto
+        }
+    </style>
+</head>
+<script th:inline="javascript">
+
+    function drawPolygon() {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+
+        const poly = [[${room.pointList}]];
+        console.log(poly);
+        const polys = [];
+        for (let i = 0; i < poly.length; i++) {
+            polys.push(poly[i].x * 100, poly[i].y * 100);
+        }
+
+        ctx.fillStyle = '#f00';
+
+        ctx.beginPath();
+        ctx.moveTo(polys[0], polys[1]);
+        for (let y = 0; y < polys.length - 1; y += 2) {
+            ctx.lineTo(polys[y], polys[y + 1]);
+        }
+        ctx.stroke();
+        ctx.fill();
+
+    }
+</script>
+<body onload="drawPolygon()">
+<h1>
+    <span>
+    Room id:
+    </span>
+    <span th:text="${room.roomId}"></span>
+</h1>
+<div id="test">
+    <canvas id="canvas"
+            width="500" height="1000">
+    </canvas>
+</div>
+</body>
+</html>
