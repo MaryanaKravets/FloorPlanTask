@@ -1,4 +1,5 @@
-#FloorPlanTask
+#
+FloorPlanTask
 
 Use:
 
@@ -32,6 +33,6 @@ Functionality:
             ] 
           }
 
-    2) GET http://localhost:8080  for get all rooms from db
+   2) GET http://localhost:8080  for get all rooms from db
 
    3)  GET http://localhost:8080/{id}  for get room with id from db
